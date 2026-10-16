@@ -1449,7 +1449,7 @@ MonoBehaviour:
     rid: 5105595671045734401
   m_ShadowCastingSource: 2
   m_ShadowMesh:
-    m_Mesh: {fileID: 1763297654}
+    m_Mesh: {fileID: 1886553573}
     m_LocalBounds:
       m_Center: {x: -0.000015258789, y: -0.5, z: 0}
       m_Extent: {x: 9.999985, y: 6.5, z: 0}
@@ -1911,6 +1911,7 @@ GameObject:
   - component: {fileID: 845740342}
   - component: {fileID: 845740348}
   - component: {fileID: 845740347}
+  - component: {fileID: 845740349}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2122,7 +2123,23 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!43 &913397271
+--- !u!114 &845740349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845740341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fa7696f2884e44b95562e00c5e1f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightController
+  _lightObj: {fileID: 142344444}
+  _isUseLight: 0
+  _hasLightSceneNames:
+  - DungeonMap
+--- !u!43 &990466992
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8841,7 +8858,7 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!43 &1763297654
+--- !u!43 &1886553573
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9285,7 +9302,7 @@ MonoBehaviour:
     rid: 5105595671045734403
   m_ShadowCastingSource: 2
   m_ShadowMesh:
-    m_Mesh: {fileID: 913397271}
+    m_Mesh: {fileID: 990466992}
     m_LocalBounds:
       m_Center: {x: -2, y: -0.5, z: 0}
       m_Extent: {x: 3, y: 2.5, z: 0}
