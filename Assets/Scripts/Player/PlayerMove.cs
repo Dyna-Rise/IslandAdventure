@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
 
 // 方向
 public enum Direction
@@ -139,7 +138,7 @@ public class PlayerMove : MonoBehaviour
 
                 // ぶつかった相手の反対方向にヒットバックさせる
                 //方向を取得して1に整える（正規化）
-                Vector3 v = (transform.position - target.transform.position).normalized; 
+                Vector3 v = (transform.position - target.transform.position).normalized;
                 _rbody.AddForce(new Vector2(v.x * 4, v.y * 4), ForceMode2D.Impulse); //正規化されているので4倍 
                 _inDamage = true;            // ダメージフラグ ON
                 Invoke("DamageEnd", 0.25f);
