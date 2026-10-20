@@ -15,13 +15,18 @@ public class PlayerAttack : MonoBehaviour
     [Header("剣・斬撃のプレハブ")]
     [SerializeField] private GameObject _swordPrefab;        // 剣のプレハブ
     [SerializeField] private GameObject _swordEffectPrefab;        // 斬撃のプレハブ
-    private Coroutine _swordAttackCoroutine;
-    private Coroutine _arrowAttackCoroutine;
+
+    //発動したコルーチン情報が入る変数
+    private Coroutine _swordAttackCoroutine; 
+    private Coroutine _arrowAttackCoroutine; 
 
     private GameObject _bowObj;         // 弓のゲームオブジェクト
-    private GameObject _swordObj;         // 弓のゲームオブジェクト
+    private GameObject _swordObj;         // 剣のゲームオブジェクト
+
+    //InputSystem上の特定のActionが入る変数
     private InputAction _bowAttackAction;           // 弓Attackアクション
     private InputAction _swordAttackAction;           // 剣Attackアクション
+
     private float _pressTime;                    // 長押し時間記録
 
     private PlayerMove _playerMove;　//PlayerMoveコンポーネントを参照する変数
@@ -42,7 +47,7 @@ public class PlayerAttack : MonoBehaviour
     // 剣Attackアクションのコールバック
     void OnLongPressStarted(InputAction.CallbackContext context)
     {
-        Slash();
+        Slash(); //剣による攻撃
     }
 
     //矢を発射
@@ -76,13 +81,14 @@ public class PlayerAttack : MonoBehaviour
 
             //SoundManager.soundManager.SEPlay(SEType.Shoot);     // SE再生（矢を射る）
 
-            _arrowAttackCoroutine = StartCoroutine(ArrowAttack());
+            _arrowAttackCoroutine = StartCoroutine(ArrowAttack()); //コルーチンを発動してその情報を変数に入れる
         }
     }
 
+    //0.2秒待ってから、自分の発動情報を入れているかもしれない変数の中身をnullに解放する
     IEnumerator ArrowAttack()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.2f); //0.2秒　ここで待つ
         _arrowAttackCoroutine = null;
     }
 
@@ -123,15 +129,17 @@ public class PlayerAttack : MonoBehaviour
         _bowObj.SetActive(true);  //一時的に非表示にしていた矢を復活
     }
 
+    //このスクリプトが無くなることがあれば ※Playerオブジェごといなくなる、など
+    //誤作動防止のためにコールバックを解放しておく
     void OnDisable()
     {
-        if (_bowAttackAction != null)
+        if (_bowAttackAction != null) //変数にアクションが指定されていれば
         {
-            _bowAttackAction.canceled -= OnAttackCallback;          // キャンセルコールバック削除
+            _bowAttackAction.canceled -= OnAttackCallback;    // キャンセルコールバック削除
         }
-        if (_swordAttackAction != null)
+        if (_swordAttackAction != null) //変数にアクションが指定されていれば
         {
-            _swordAttackAction.started -= OnLongPressStarted;          // キャンセルコールバック削除
+            _swordAttackAction.started -= OnLongPressStarted;  // キャンセルコールバック削除
         }
     }
 
@@ -182,6 +190,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    //弓と剣の位置（回転）と、order in layerの前後を決めるメソッド
     void DrawAttackItemPosition(float currentAngleZ)
     {
         int orderNumber = 4; // 描画アイテムの オーダーインレイヤー(キャラクターの前にする)
@@ -199,6 +208,7 @@ public class PlayerAttack : MonoBehaviour
         // 描画の優先順位
         _bowObj.GetComponent<SpriteRenderer>().sortingOrder = orderNumber;
 
+        orderNumber = 4; //リセット
 
         // 剣描画の優先順位
         if (currentAngleZ >= -45 && currentAngleZ < 45) // 右向き
