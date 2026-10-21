@@ -9,6 +9,7 @@ public class ItemKeeper : MonoBehaviour
 
     void Start()
     {
+        hasArrows = 100;
         //_uiCnt = GameObject.FindFirstObjectByType<UIController>();   // シーン中のUIController取得
     }
 
