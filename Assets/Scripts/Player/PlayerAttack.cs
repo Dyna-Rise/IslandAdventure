@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
 
     private PlayerMove _playerMove;　//PlayerMoveコンポーネントを参照する変数
 
-    //private UIController _uiCnt; //UIControllerコンポーネントを参照する変数
+    private UIController _uiCnt; //UIControllerコンポーネントを参照する変数
 
     // 弓Attackアクションのコールバック
     void OnAttackCallback(InputAction.CallbackContext context)
@@ -76,8 +76,8 @@ public class PlayerAttack : MonoBehaviour
             body.AddForce(v, ForceMode2D.Impulse);
 
 
-            //_uiCnt.UpdateItemCount(ItemType.arrow, ItemKeeper.hasArrows);    	                // 矢を更新
-            //_uiCnt.UpdatePower(0);                                                  // パワーを更新
+            _uiCnt.UpdateItemCount(ItemType.arrow, ItemKeeper.hasArrows);    	                // 矢を更新
+            _uiCnt.UpdatePower(0);                                                  // パワーを更新
 
             //SoundManager.soundManager.SEPlay(SEType.Shoot);     // SE再生（矢を射る）
 
@@ -166,7 +166,7 @@ public class PlayerAttack : MonoBehaviour
         InputActionMap uiMap = input.actions.FindActionMap("UI");   // UIマップ取得
         uiMap.Disable();                                            // UIマップ無効化
 
-        //_uiCnt = GameObject.FindFirstObjectByType<UIController>();   // シーン中のUIController取得
+        _uiCnt = GameObject.FindFirstObjectByType<UIController>();   // シーン中のUIController取得
     }
 
     void Update()
@@ -185,7 +185,7 @@ public class PlayerAttack : MonoBehaviour
                 //長押し時間に合わせて弓を変形させる
                 _bowObj.transform.localScale = new Vector3(1 - (_pressTime * 0.2f), 1 + (_pressTime * 0.5f), 1);
 
-                //_uiCnt.UpdatePower(_pressTime);	                                        // パワーを更新
+                _uiCnt.UpdatePower(_pressTime);	  // パワーを更新
             }
         }
     }
