@@ -20,7 +20,7 @@ public class ItemBox : MonoBehaviour
         //}
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if(_isClosed && collision.gameObject.tag == "Player")
         {
@@ -34,7 +34,7 @@ public class ItemBox : MonoBehaviour
     // 中身のアイテムを出す
     void SpawnItem()
     {
-        if(_itemprefab == null) return;
+        if(_itemprefab == null) return; //どのアイテムなのか指定されていなければ何もしない
 
         string itemId = _id + "_Item";  // 箱から出るアイテムは箱のIDをもとにする
         //if (SaveDataManager.IsUsed(itemId)) return;     // すでに取っていれば出さない
