@@ -5,7 +5,7 @@ public class ItemBox : MonoBehaviour
 {
     [SerializeField] private Sprite _openImage;
     [SerializeField] private GameObject _itemprefab;
-    private bool _isClosed = true;
+    private bool _isClosed = true; //trueの間は閉じる、開くとfalse
     private string _id;     // セーブ用のID
 
     void Start()
