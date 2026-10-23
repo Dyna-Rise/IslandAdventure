@@ -11,13 +11,13 @@ public class ItemBox : MonoBehaviour
     void Start()
     {
         // すでに開けた箱なら開いた状態にする
-        //_id = SaveDataManager.MakeId(gameObject);
-        //if (SaveDataManager.IsUsed(_id))
-        //{
-        //    GetComponent<SpriteRenderer>().sprite = _openImage;
-        //    _isClosed = false;
-        //    SpawnItem();    // 中身をまだ取っていなければもう一度出す
-        //}
+        _id = SaveDataManager.MakeId(gameObject);
+        if (SaveDataManager.IsUsed(_id))
+        {
+            GetComponent<SpriteRenderer>().sprite = _openImage;
+            _isClosed = false;
+            SpawnItem();    // 中身をまだ取っていなければもう一度出す
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,7 +26,7 @@ public class ItemBox : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().sprite = _openImage;
             _isClosed = false;
-            //SaveDataManager.SetUsed(_id);   // 開けたことを記録
+            SaveDataManager.SetUsed(_id);   // 開けたことを記録
             SpawnItem();
         }
     }

@@ -3,11 +3,17 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     private UIController _uiCnt; //UIControllerスクリプトを参照できる変数
+    private string _id; //セーブ用ID
 
     void Start()
     {
         //UIControllerスクリプトを探してくる
         _uiCnt = GameObject.FindFirstObjectByType<UIController>();
+        _id = SaveDataManager.MakeId(gameObject);
+        if (SaveDataManager.IsUsed(_id))
+        {
+            Destroy(gameObject);
+        }
     }
 
     //接触した時
@@ -23,6 +29,7 @@ public class Door : MonoBehaviour
                 ItemKeeper.hasKeys--; //1減らす
                 Destroy(gameObject); //ドア消滅
                 _uiCnt.UpdateItemCount(ItemType.key, ItemKeeper.hasKeys); //UI更新
+                SaveDataManager.SetUsed(_id); //開錠したのでリストに刻まれる
             }
         }
     }    　

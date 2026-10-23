@@ -127,7 +127,7 @@ MonoBehaviour:
   _buttonPanel: {fileID: 6513226142130922398}
   _retryButton: {fileID: 7002925097214096983}
   _quitButton: {fileID: 2872933287341438790}
-  _gameClearImage: {fileID: 1536380896892045753, guid: 5d30e48e71e306a4599bde9b0f556c3b, type: 3}
+  _gameClearImage: {fileID: 21300000, guid: 5d30e48e71e306a4599bde9b0f556c3b, type: 3}
 --- !u!1 &1028303456942972667
 GameObject:
   m_ObjectHideFlags: 0
