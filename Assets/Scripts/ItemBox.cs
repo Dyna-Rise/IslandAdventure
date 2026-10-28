@@ -37,7 +37,7 @@ public class ItemBox : MonoBehaviour
         if(_itemprefab == null) return; //どのアイテムなのか指定されていなければ何もしない
 
         string itemId = _id + "_Item";  // 箱から出るアイテムは箱のIDをもとにする
-        //if (SaveDataManager.IsUsed(itemId)) return;     // すでに取っていれば出さない
+        if (SaveDataManager.IsUsed(itemId)) return;     // すでに取っていれば出さない
 
         GameObject itemObj = Instantiate(_itemprefab, transform.position, Quaternion.identity);
         itemObj.GetComponent<ItemData>().id = itemId;
