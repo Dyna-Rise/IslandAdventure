@@ -10,7 +10,11 @@ public class TitleManager : MonoBehaviour
     void Start()
     {
         // セーブデータがなければContinueボタンを押せなくする
-        //_continueButton.GetComponent<Button>().interactable = SaveDataManager.HasSaveData();
+        _continueButton.GetComponent<Button>().interactable = SaveDataManager.HasSaveData();
+
+
+        //タイトルBGM
+        SoundManager.soundManager.PlayBgm(BGMType.Title);
     }
 
     public void StartButtonClicked()

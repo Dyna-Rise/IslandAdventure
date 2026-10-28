@@ -93,6 +93,11 @@ public class BossController : MonoBehaviour
         }
         else //死亡時
         {
+            SoundManager.soundManager.SEPlay(SEType.EnemyKilled);//SEを鳴らす
+
+            SoundManager.soundManager.StopBgm();//BGM停止
+            SoundManager.soundManager.SEPlay(SEType.GameClear);//ゲームクリアSEを鳴らす
+
             GetComponent<CircleCollider2D>().enabled = false;
             _animator.SetTrigger("IsDead");
             Destroy(gameObject, 1.0f);

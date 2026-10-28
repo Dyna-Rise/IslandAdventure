@@ -48,16 +48,18 @@ public class UIController : MonoBehaviour
 
     public void Retry()
     {
+        SoundManager.playingBGM = BGMType.None;
+
         // セーブデータがあれば最後にセーブした状態でセーブポイントから再開
-        //if (SaveDataManager.HasSaveData())
-        //{
-        //    SaveDataManager.LoadAndRestart();
-        //}
-        //else
-        //{
+        if (SaveDataManager.HasSaveData())
+        {
+            SaveDataManager.LoadAndRestart();
+        }
+        else
+        {
             PlayerMove.life = 1.0f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        //}
+        }
     }
 
     public void Quit()

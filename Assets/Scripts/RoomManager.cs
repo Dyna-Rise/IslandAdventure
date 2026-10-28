@@ -1,13 +1,27 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviour
 {
     //シーンをまたぐ時、何番出口だったのかを記憶していくstatic変数
     public static int currentDoorNumber = 0;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //シーン名取得
+        string sceneName = SceneManager.GetActiveScene().name;
+        //取得した名前に応じてBGM切替
+        if(sceneName == "BossStage")
+        {
+            SoundManager.soundManager.PlayBgm(BGMType.InBoss);
+        }
+        else
+        {
+            SoundManager.soundManager.PlayBgm(BGMType.InGame);
+        }
+
+
+
         //全Exitタグを調べて該当したGameObjectを全て配列に格納
         GameObject[] exits = GameObject.FindGameObjectsWithTag("Exit");
 

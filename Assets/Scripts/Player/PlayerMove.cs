@@ -128,6 +128,8 @@ public class PlayerMove : MonoBehaviour
     {
         if (GameManager.gameState == GameState.InGame)
         {
+            SoundManager.soundManager.SEPlay(SEType.GetDamage);//SEを鳴らす
+
             life -= 0.25f; //ライフを減らす
             //ライフを更新
             _uiCnt.UpdateLife(PlayerMove.life);
@@ -176,6 +178,9 @@ public class PlayerMove : MonoBehaviour
         input.currentActionMap.Enable();                        // UIマップ有効化
 
         Invoke("PlayerGravityEnd", 2.0f); //アニメーション演出が終わるころ落下は停止
+
+        SoundManager.soundManager.StopBgm();//BGM停止
+        SoundManager.soundManager.SEPlay(SEType.GameOver);//ゲームオーバーSEを鳴らす
     }
 
     void PlayerGravityEnd()

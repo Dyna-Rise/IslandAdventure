@@ -18,25 +18,29 @@ public enum SEType
     ItemGet,    //アイテムゲット
     GetDamage,  //ダメージ
     EnemyKilled,//敵死亡
+    Slash //剣攻撃
 }
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] public AudioClip _bgmInTitle;    //タイトルBGM
-    [SerializeField] public AudioClip _bgmInGame;     //ゲーム中
-    [SerializeField] public AudioClip _bgmInBoss;     //ボス戦BGM
+    [SerializeField] private AudioClip _bgmInTitle;    //タイトルBGM
+    [SerializeField] private AudioClip _bgmInGame;     //ゲーム中
+    [SerializeField] private AudioClip _bgmInBoss;     //ボス戦BGM
 
-    [SerializeField] public AudioClip _meGameClear;   //ゲームクリア
-    [SerializeField] public AudioClip _meGameOver;    //ゲームオーバー
-    [SerializeField] public AudioClip _seShoot;       //矢を射る
+    [SerializeField] private AudioClip _meGameClear;   //ゲームクリア
+    [SerializeField] private AudioClip _meGameOver;    //ゲームオーバー
+    [SerializeField] private AudioClip _seShoot;       //矢を射る
 
-    [SerializeField] public AudioClip _seDoorOpen;    //ドア開く
-    [SerializeField] public AudioClip _seDoorClosed;  //ドア閉まっている
-    [SerializeField] public AudioClip _seItemGet;     //アイテムゲット
-    [SerializeField] public AudioClip _seDamage;      //ダメージ
-    [SerializeField] public AudioClip _seEnemyDead;   //敵死亡
+    [SerializeField] private AudioClip _seDoorOpen;    //ドア開く
+    [SerializeField] private AudioClip _seDoorClosed;  //ドア閉まっている
+    [SerializeField] private AudioClip _seItemGet;     //アイテムゲット
+    [SerializeField] private AudioClip _seDamage;      //ダメージ
+    [SerializeField] private AudioClip _seEnemyDead;   //敵死亡
+    [SerializeField] private AudioClip _seSlash;   //剣を振る音
+
+    [SerializeField] private AudioSource[] _audioSources;
 
     public static SoundManager soundManager;        // SoundManagerを保存する変数
-    public static BGMType playing = BGMType.None;   // 再生中のBGM
+    public static BGMType playingBGM = BGMType.None;   // 再生中のBGM
 
     void Awake()
     {
@@ -56,10 +60,10 @@ public class SoundManager : MonoBehaviour
     //BGM設定
     public void PlayBgm(BGMType type)
     {
-        if (type != playing)
+        if (type != playingBGM)
         {
-            playing = type;
-            AudioSource audio = GetComponent<AudioSource>();
+            playingBGM = type;
+            AudioSource audio = _audioSources[0];
             if (type == BGMType.Title)
             {
                 audio.clip = _bgmInTitle;    //タイトル
@@ -79,44 +83,50 @@ public class SoundManager : MonoBehaviour
     public void StopBgm()
     {
         GetComponent<AudioSource>().Stop();
-        playing = BGMType.None;
+        playingBGM = BGMType.None;
     }
 
     //SE再生
     public void SEPlay(SEType type)
     {
+        AudioSource audio = _audioSources[1];
+
         if (type == SEType.GameClear)
         {
-            GetComponent<AudioSource>().PlayOneShot(_meGameClear);   //ゲームクリア
+            audio.PlayOneShot(_meGameClear);   //ゲームクリア
         }
         else if (type == SEType.GameOver)
         {
-            GetComponent<AudioSource>().PlayOneShot(_meGameOver);   //ゲームオーバー
+            audio.PlayOneShot(_meGameOver);   //ゲームオーバー
         }
         else if (type == SEType.Shoot)
         {
-            GetComponent<AudioSource>().PlayOneShot(_seShoot);       //矢を射る
+            audio.PlayOneShot(_seShoot);       //矢を射る
         }
 
         else if (type == SEType.DoorClosed)
         {
-            GetComponent<AudioSource>().PlayOneShot(_seDoorClosed);  //ドア閉まっている
+            audio.PlayOneShot(_seDoorClosed);  //ドア閉まっている
         }
         else if (type == SEType.DoorOpen)
         {
-            GetComponent<AudioSource>().PlayOneShot(_seDoorOpen);    //ドア開く
+            audio.PlayOneShot(_seDoorOpen);    //ドア開く
         }
         else if (type == SEType.ItemGet)
         {
-            GetComponent<AudioSource>().PlayOneShot(_seItemGet);     //アイテムゲット
+            audio.PlayOneShot(_seItemGet);     //アイテムゲット
         }
         else if (type == SEType.GetDamage)
         {
-            GetComponent<AudioSource>().PlayOneShot(_seDamage);      //ダメージ
+            audio.PlayOneShot(_seDamage);      //ダメージ
         }
         else if (type == SEType.EnemyKilled)
         {
-            GetComponent<AudioSource>().PlayOneShot(_seEnemyDead);   //敵死亡
+            audio.PlayOneShot(_seEnemyDead);   //敵死亡
+        }
+        else if (type == SEType.Slash)
+        {
+            audio.PlayOneShot(_seSlash);   //敵死亡
         }
     }
 }

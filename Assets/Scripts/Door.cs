@@ -26,10 +26,16 @@ public class Door : MonoBehaviour
         {
             if(ItemKeeper.hasKeys > 0)
             {
+                SoundManager.soundManager.SEPlay(SEType.DoorOpen);//SEを鳴らす
+
                 ItemKeeper.hasKeys--; //1減らす
                 Destroy(gameObject); //ドア消滅
                 _uiCnt.UpdateItemCount(ItemType.key, ItemKeeper.hasKeys); //UI更新
                 SaveDataManager.SetUsed(_id); //開錠したのでリストに刻まれる
+            }
+            else
+            {
+                SoundManager.soundManager.SEPlay(SEType.DoorClosed);//SEを鳴らす
             }
         }
     }    　
