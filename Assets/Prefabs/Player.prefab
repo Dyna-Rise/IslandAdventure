@@ -362,6 +362,7 @@ MonoBehaviour:
   _isUseLight: 0
   _hasLightSceneNames:
   - DungeonMap
+  - BossStage
 --- !u!114 &5534851152333219153
 MonoBehaviour:
   m_ObjectHideFlags: 0
