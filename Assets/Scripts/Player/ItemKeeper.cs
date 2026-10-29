@@ -3,13 +3,12 @@ using UnityEngine;
 public class ItemKeeper : MonoBehaviour
 {
     public static float hasKeys = 0.0f;
-    public static float hasArrows = 1.0f;
+    public static float hasArrows = 0.0f;
 
     private UIController _uiCnt;
 
     void Start()
     {
-        hasArrows = 100;
         _uiCnt = GameObject.FindFirstObjectByType<UIController>();   // シーン中のUIController取得
     }
 
@@ -18,7 +17,7 @@ public class ItemKeeper : MonoBehaviour
         if(collision.gameObject.tag == "Item")
         {
             ItemData item = collision.gameObject.GetComponent<ItemData>();
-            //SaveDataManager.SetUsed(item.id);   // 取ったことを記録
+            SaveDataManager.SetUsed(item.id);   // 取ったことを記録
 
             if (item.itemType == ItemType.arrow)
             {

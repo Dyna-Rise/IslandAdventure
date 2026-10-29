@@ -64,8 +64,8 @@ public class UIController : MonoBehaviour
 
     public void Quit()
     {
-        //SceneManager.LoadScene("Title");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);　//Title作るまでの仮
+        SceneManager.LoadScene("Title");
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);　//Title作るまでの仮
     }
 
     void Start()

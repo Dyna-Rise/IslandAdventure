@@ -25,6 +25,6 @@ public class TitleManager : MonoBehaviour
 
     public void ContinueButtonClicked()
     {
-        //SaveDataManager.LoadAndRestart();   // 最後にセーブした状態でセーブポイントから再開
+        SaveDataManager.LoadAndRestart();   // 最後にセーブした状態でセーブポイントから再開
     }
 }

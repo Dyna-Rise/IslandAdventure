@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
     private GameObject _player;
     private bool _inDamage = false;              // ダメージ中フラグ
 
+    private string _id; //セーブ用ID
 
     void Start()
     {
@@ -24,6 +25,12 @@ public class EnemyController : MonoBehaviour
         _animator = _enemyBody.GetComponent<Animator>();
 
         _player = GameObject.FindGameObjectWithTag("Player");
+
+        _id = SaveDataManager.MakeId(gameObject);
+        if (SaveDataManager.IsUsed(_id))
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Update()
@@ -163,6 +170,8 @@ public class EnemyController : MonoBehaviour
             _rbody.AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
             _animator.SetTrigger("IsDead");
             Destroy(gameObject, 1.0f);
+            
+            SaveDataManager.SetUsed(_id); //撃破したのでリストに刻まれる
 
             SoundManager.soundManager.SEPlay(SEType.EnemyKilled);//SEを鳴らす
         }
